@@ -19,7 +19,7 @@ public class UIManager : MonoBehaviour
     void Update()
     {
         //make points and score public variables
-        scoreText.text = "Score: ";
-        livesText.text = "Lives: ";
+        scoreText.text = "Points: " + playerControl.points;
+        livesText.text = "Lives: " + playerControl.lives;
     }
 }
