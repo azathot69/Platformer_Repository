@@ -10,8 +10,8 @@ public class Enemy : MonoBehaviour
 {
     public float speed;
     public bool goingRight = true;
-    public GameObject rightPos;
-    public GameObject leftPos;
+    //public GameObject rightPos;
+    //public GameObject leftPos;
 
     private Vector3 temp = Vector3.right;
     
@@ -24,22 +24,30 @@ public class Enemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (goingRight)
+
+        RaycastHit hit;
+
+        if (Physics.Raycast(transform.position, Vector3.right, out hit, 1.3f) && goingRight)
         {
-            if (transform.position.x >= rightPos.transform.position.x)
+            temp = Vector3.left;
+            goingRight = false;
+        }
+        if (Physics.Raycast(transform.position, Vector3.left, out hit, 1.3f) && !goingRight)
+        {
+            temp = Vector3.right;
+            goingRight = true;
+        }
+        //destroys enemy if a player 
+        if (Physics.Raycast(transform.position, Vector3.up, out hit, 1.5f))
+        {
+            Debug.Log("Enemy Collision");
+            if (hit.collider.name == "test_Player")
             {
-                temp = Vector3.left;
-                goingRight = false;
+                this.gameObject.SetActive(false);
+
             }
         }
-        else
-        {
-            if (transform.position.x <= leftPos.transform.position.x)
-            {
-                temp = Vector3.right;
-                goingRight = true;
-            }
-        }
+       
         transform.position += temp * speed * Time.deltaTime;
     }
 
