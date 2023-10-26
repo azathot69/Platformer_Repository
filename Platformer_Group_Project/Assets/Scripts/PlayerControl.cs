@@ -12,15 +12,21 @@ public class PlayerControl : MonoBehaviour
 {
 
     //Variables
-    private int lives = 3;
-    private int points = 0;
-    public int speed = 5;
+    public int lives = 3;
+    public int points = 0;
+    public int speed = 7;
     private Rigidbody rigidbodyRef;
+    public GameObject attackPrefab;
+
+    public float despawnTimer = 1f;
+
+    public Transform child;
+
     public float jumpForce = 10f;
     public float deathYLevel = -2;
 
     private bool attacking = false;
-    private float attackRate = 1.3f;
+    private float attackRate = 1.5f;
 
     public Vector3 startingX;
     public Vector3 startingY;
@@ -62,9 +68,18 @@ public class PlayerControl : MonoBehaviour
         if (attacking == false)
         {
             attacking = true;
-            Debug.Log("Player is attacking");
 
-            //Insert coroutine for attack cooldown
+            //Set Attack Active
+            attackPrefab.gameObject.SetActive(true);
+
+            //Attack cooldown
+            StartCoroutine(AttackCooldown());
+
+            //Deapwn attack
+            StartCoroutine(Despawn());
+
+
+            Debug.Log("Now Attacking");
         }
     }
 
@@ -97,9 +112,10 @@ public class PlayerControl : MonoBehaviour
             HandleJump();
         }
 
-        if (Input.GetKeyDown(KeyCode.L))
+        //Attacking
+        if (Input.GetKeyDown(KeyCode.L) && !attacking)
         {
-            Debug.Log("Now Attacking");
+            Attack();
         }
     }
 
@@ -165,5 +181,22 @@ public class PlayerControl : MonoBehaviour
                 //add to lives
                 break;
         }
+    }
+
+    //Prevents player from spamming attack
+    IEnumerator AttackCooldown()
+    {
+        
+        yield return new WaitForSeconds(attackRate);
+        attacking = false;
+    }
+
+    //Set Attack False
+    IEnumerator Despawn()
+    {
+        Debug.Log("Attack despawn");
+        yield return new WaitForSeconds(despawnTimer);
+        attackPrefab.gameObject.SetActive(false);
+
     }
 }
