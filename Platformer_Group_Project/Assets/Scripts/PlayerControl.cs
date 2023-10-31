@@ -15,6 +15,8 @@ public class PlayerControl : MonoBehaviour
     public int lives = 3;
     public int points = 0;
     public int speed = 7;
+    
+//>>>>>>> 65aeeb123b5c6ca15c563f97d1c90e2c18660cf6
     private Rigidbody rigidbodyRef;
     public GameObject attackPrefab;
 
@@ -30,6 +32,9 @@ public class PlayerControl : MonoBehaviour
 
     public Vector3 startingX;
     public Vector3 startingY;
+    //jaspers additions
+    public Vector3 spawnPoint;
+    public GameObject tempPortal;
 
     // Start is called before the first frame update
     void Start()
@@ -40,6 +45,7 @@ public class PlayerControl : MonoBehaviour
         //Store object's X coordinates when scene starts
         startingX = transform.position;
         startingY = transform.position;
+        spawnPoint = transform.position;
     }
 
     // Update is called once per frame
@@ -134,27 +140,42 @@ public class PlayerControl : MonoBehaviour
     }
 
     /// <summary>
-    /// MaMakes the player lose a life.
+    /// Makes the player lose a life.
     /// If there is no lives left, perish
     /// </summary>
     private void Respawn()
     {
-        if (lives != 0)
+        //I rewrote the respawn script because it wasn't telling me when I died
+        lives--;
+        transform.position = spawnPoint;
+        if (lives <= 0)
+        {
+            Debug.Log("Player Died");
+            //swithces scene to game over
+            //EndScreen.SceneSwitch(1);
+            //just moves player back (for testing)
+            transform.position = spawnPoint;
+        }
+
+        //this wasn't letting me die until I was at -1 lives, sometimes not at all
+        /*if (lives != 0)
         {
             lives--;
 
             //Return to last spawn point
             transform.position = startingX;
             transform.position = startingY;
+            if 
         }
         else
         {
             Debug.Log("The player has died");
-
+            //sceneManager.SceneSwitch(1);
             //Replace below code with proper Game Over Scene
             transform.position = startingX;
             transform.position = startingY;
-        }
+        }*/
+
     }
 
     /// <summary>
@@ -174,12 +195,23 @@ public class PlayerControl : MonoBehaviour
                 break;
 
             case "Points":
+                points++;
+                other.gameObject.SetActive(false);
                 //add to points
                 break;
 
             case "Lives":
+                lives++;
                 //add to lives
                 break;
+
+            case "Portal":
+                Debug.Log("collided with portal");
+                Portal tempPortal = other.gameObject.GetComponent<Portal>();
+                transform.position = tempPortal.portalLocation.transform.position;
+                spawnPoint = transform.position;
+                break;
+
         }
     }
 

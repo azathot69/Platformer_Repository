@@ -4,8 +4,13 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
+//Liebert, Jasper
+//10/31/2023
+//This script will update the text to match the players coins and lives
+
 public class UIManager : MonoBehaviour
 {
+    //variables
     public PlayerControl playerControl;
     public TMP_Text scoreText;
     public TMP_Text livesText;
@@ -18,8 +23,15 @@ public class UIManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //make points and score public variables
+        TextUpdate();
+    }
+
+    /// <summary>
+    /// updates TMP text to display points and lives
+    /// </summary>
+    private void TextUpdate()
+    {
         scoreText.text = "Points: " + playerControl.points;
         livesText.text = "Lives: " + playerControl.lives;
-    }
+    }    
 }
