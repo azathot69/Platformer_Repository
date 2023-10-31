@@ -9,6 +9,7 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
+    public float bounce = 5.0f;
     public float speed;
     public bool goingRight = true;
     //public GameObject rightPos;
@@ -27,34 +28,24 @@ public class Enemy : MonoBehaviour
     {
 
         RaycastHit hit;
-
-        if (Physics.Raycast(transform.position, Vector3.right, out hit, 1.3f)){
-            if (hit.collider.tag == "Attack")
-            {
-                return;
-            }
-        }
-
-        if (Physics.Raycast(transform.position, Vector3.right, out hit, 1.3f) && goingRight)
+        if (Physics.Raycast(transform.position, Vector3.right, out hit, 0.5f) && goingRight && hit.collider.name != "test_Player" && hit.collider.name != "Attack")
         {
             temp = Vector3.left;
             goingRight = false;
         }
-        if (Physics.Raycast(transform.position, Vector3.left, out hit, 1.3f) && !goingRight)
+        if (Physics.Raycast(transform.position, Vector3.left, out hit, 0.5f) && !goingRight && hit.collider.name != "test_Player" && hit.collider.name != "Attack")
         {
             temp = Vector3.right;
             goingRight = true;
         }
-        //destroys enemy if a player 
-        if (Physics.Raycast(transform.position, Vector3.up, out hit, 1.5f))
+        //destroys enemy if a player
+        /*
+        if (Physics.Raycast(transform.position, Vector3.up, out hit, 1.5f) && hit.collider.name == "test_Player")
         {
             Debug.Log("Enemy Collision");
-            if (hit.collider.name == "test_Player")
-            {
-                this.gameObject.SetActive(false);
-
-            }
-        }
+            hit.collider.attachedRigidbody.AddForce(Vector3.up * bounce, ForceMode.Impulse);
+            this.gameObject.SetActive(false);
+        }*/
        
         transform.position += temp * speed * Time.deltaTime;
     }

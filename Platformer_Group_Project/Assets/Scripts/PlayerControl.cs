@@ -178,7 +178,7 @@ public class PlayerControl : MonoBehaviour
                 Debug.Log("Player dies by enemy");
                 break;
 
-            case "Points":
+            case "Coin":
                 points++;
                 other.gameObject.SetActive(false);
                 Debug.Log("Player collect fruit");
