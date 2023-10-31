@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.4501111, g: 0.49763322, b: 0.56189144, a: 1}
+  m_IndirectSpecularColor: {r: 0.4501109, g: 0.49763232, b: 0.5618904, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -239,6 +239,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0e76645a884a8b408f56def29a638ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerControl: {fileID: 360610594}
+  scoreText: {fileID: 775604039}
+  livesText: {fileID: 1411821634}
 --- !u!1 &17974203
 GameObject:
   m_ObjectHideFlags: 0
@@ -865,6 +868,17 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 4813164638851262166, guid: 6d164d499bd8c3847bc96d1c46626424, type: 3}
   m_PrefabInstance: {fileID: 176915301}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &360610594 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7283470117081612547, guid: 6d164d499bd8c3847bc96d1c46626424, type: 3}
+  m_PrefabInstance: {fileID: 176915301}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 360610592}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d30914f3d488e0b4bad9bc64b91f4e99, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &455916557
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3095,7 +3109,7 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
@@ -3597,6 +3611,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1272604589}
     m_Modifications:
+    - target: {fileID: 459633250913695110, guid: ad16a745b8c0abe4eb2bf7ef700b1ddd, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 946343220930018063, guid: ad16a745b8c0abe4eb2bf7ef700b1ddd, type: 3}
       propertyPath: m_Name
       value: Enemy
