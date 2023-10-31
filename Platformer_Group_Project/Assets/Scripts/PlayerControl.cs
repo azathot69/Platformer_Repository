@@ -214,11 +214,6 @@ public class PlayerControl : MonoBehaviour
                 spawnPoint = transform.position;
                 break;
 
-            case "Spike":
-                Debug.Log("collided with spikes");
-                Respawn();
-                break;
-
             case "Shield":
                 Debug.Log("collided with spikes");
                 Respawn();
