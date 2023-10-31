@@ -181,6 +181,7 @@ public class PlayerControl : MonoBehaviour
                 if (other.transform.position.y <= transform.position.y)
                 {
                     other.gameObject.SetActive(false);
+                    rigidbodyRef.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
                     break;
                 }
                 else
@@ -207,6 +208,16 @@ public class PlayerControl : MonoBehaviour
                 Portal tempPortal = other.gameObject.GetComponent<Portal>();
                 transform.position = tempPortal.portalLocation.transform.position;
                 spawnPoint = transform.position;
+                break;
+
+            case "Spike":
+                Debug.Log("collided with spikes");
+                Respawn();
+                break;
+
+            case "Shield":
+                Debug.Log("collided with spikes");
+                Respawn();
                 break;
 
         }
