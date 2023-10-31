@@ -25,6 +25,9 @@ public class PlayerControl : MonoBehaviour
     public Transform child;
 
     public float jumpForce = 10f;
+    //bouncing off an enemies head
+    public float bounce = 5.0f;
+
     public float deathYLevel = -2;
 
     private bool attacking = false;
@@ -118,6 +121,7 @@ public class PlayerControl : MonoBehaviour
             HandleJump();
         }
 
+     
         //Attacking
         if (Input.GetKeyDown(KeyCode.L) && !attacking)
         {
@@ -174,9 +178,17 @@ public class PlayerControl : MonoBehaviour
                 break;
 
             case "Enemy":
-                Respawn();
-                Debug.Log("Player dies by enemy");
-                break;
+                if (other.transform.position.y <= transform.position.y)
+                {
+                    other.gameObject.SetActive(false);
+                    break;
+                }
+                else
+                {
+                    Debug.Log("Player dies by enemy");
+                    Respawn();
+                    break;
+                }
 
             case "Coin":
                 points++;
@@ -199,6 +211,7 @@ public class PlayerControl : MonoBehaviour
 
         }
     }
+
 
     //Prevents player from spamming attack
     IEnumerator AttackCooldown()
