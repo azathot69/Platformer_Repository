@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 //Liebert, Jasper
@@ -26,6 +27,13 @@ public class Enemy : MonoBehaviour
     {
 
         RaycastHit hit;
+
+        if (Physics.Raycast(transform.position, Vector3.right, out hit, 1.3f)){
+            if (hit.collider.tag == "Attack")
+            {
+                return;
+            }
+        }
 
         if (Physics.Raycast(transform.position, Vector3.right, out hit, 1.3f) && goingRight)
         {

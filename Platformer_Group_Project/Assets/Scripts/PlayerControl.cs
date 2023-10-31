@@ -157,24 +157,7 @@ public class PlayerControl : MonoBehaviour
             transform.position = spawnPoint;
         }
 
-        //this wasn't letting me die until I was at -1 lives, sometimes not at all
-        /*if (lives != 0)
-        {
-            lives--;
-
-            //Return to last spawn point
-            transform.position = startingX;
-            transform.position = startingY;
-            if 
-        }
-        else
-        {
-            Debug.Log("The player has died");
-            //sceneManager.SceneSwitch(1);
-            //Replace below code with proper Game Over Scene
-            transform.position = startingX;
-            transform.position = startingY;
-        }*/
+        
 
     }
 
