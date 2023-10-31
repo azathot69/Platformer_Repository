@@ -194,7 +194,7 @@ public class PlayerControl : MonoBehaviour
                 Respawn();
                 break;
 
-            case "Points":
+            case "Coin":
                 points++;
                 other.gameObject.SetActive(false);
                 //add to points
