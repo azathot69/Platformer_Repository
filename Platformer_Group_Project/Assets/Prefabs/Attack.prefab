@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 3420971117721086622}
   m_Layer: 0
   m_Name: Attack
-  m_TagString: Untagged
+  m_TagString: Attack
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -118,8 +118,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea02f3c3b72727b479db3fb5d7251c60, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jumpForce: 10
-  despawnTimer: 1
-  parent: {fileID: 5736957482222715758, guid: 6d164d499bd8c3847bc96d1c46626424, type: 3}
-  playerPrefab: {fileID: 4813164638851262166, guid: 6d164d499bd8c3847bc96d1c46626424, type: 3}
-  speed: 7

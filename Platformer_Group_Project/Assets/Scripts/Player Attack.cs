@@ -21,6 +21,21 @@ public class PlayerAttack : MonoBehaviour
 
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        switch (other.gameObject.tag)
+        {
+            default:
+                Debug.Log("If you see this, let me know - Joseph");
+                break;
 
+            case "Enemy":
+                other.gameObject.SetActive(false);
+                break;
+
+            
+
+        }
+    }
 
 }
