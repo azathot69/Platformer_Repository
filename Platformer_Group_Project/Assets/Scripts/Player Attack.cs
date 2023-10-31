@@ -34,6 +34,7 @@ public class PlayerAttack : MonoBehaviour
 
             case "Enemy":
                 other.gameObject.SetActive(false);
+                Debug.Log("Player hit an enemy!");
                 break;
 
             

@@ -38,15 +38,7 @@ public class SpikedEnemy : MonoBehaviour
             temp = Vector3.right;
             goingRight = true;
         }
-        //destroys enemy if a player
-        /*
-        if (Physics.Raycast(transform.position, Vector3.up, out hit, 1.5f) && hit.collider.name == "test_Player")
-        {
-            Debug.Log("Enemy Collision");
-            hit.collider.attachedRigidbody.AddForce(Vector3.up * bounce, ForceMode.Impulse);
-            this.gameObject.SetActive(false);
-        }*/
-       
+
         transform.position += temp * speed * Time.deltaTime;
     }
 
