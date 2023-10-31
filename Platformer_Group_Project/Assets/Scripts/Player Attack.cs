@@ -1,12 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 public class PlayerAttack : MonoBehaviour
 {
     //Variables
-
-
+    public GameObject playerPrefab;
+    private Vector3 position;
     // Start is called before the first frame update
     void Start()
     {
@@ -17,7 +19,8 @@ public class PlayerAttack : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        Vector3 playerPosition = playerPrefab.transform.position;
+        transform.position = playerPosition;
 
     }
 
@@ -26,7 +29,7 @@ public class PlayerAttack : MonoBehaviour
         switch (other.gameObject.tag)
         {
             default:
-                Debug.Log("If you see this, let me know - Joseph");
+
                 break;
 
             case "Enemy":

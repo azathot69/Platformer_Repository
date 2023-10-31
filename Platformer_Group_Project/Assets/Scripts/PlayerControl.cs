@@ -170,16 +170,18 @@ public class PlayerControl : MonoBehaviour
         switch (other.gameObject.tag)
         {
             default:
-                Debug.Log("If you see this, let me know - Joseph");
+                //Debug.Log("If you see this, let me know - Joseph");
                 break;
 
             case "Enemy":
                 Respawn();
+                Debug.Log("Player dies by enemy");
                 break;
 
             case "Points":
                 points++;
                 other.gameObject.SetActive(false);
+                Debug.Log("Player collect fruit");
                 //add to points
                 break;
 
