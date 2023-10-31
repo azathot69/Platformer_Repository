@@ -191,6 +191,10 @@ public class PlayerControl : MonoBehaviour
                     break;
                 }
 
+            case "Spike":
+                Respawn();
+                break;
+
             case "Coin":
                 points++;
                 other.gameObject.SetActive(false);
