@@ -8,6 +8,7 @@ TagManager:
   - Portal
   - Coin
   - Attack
+  - Spike
   layers:
   - Default
   - TransparentFX
