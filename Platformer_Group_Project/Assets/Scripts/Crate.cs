@@ -25,7 +25,6 @@ public class Crate : MonoBehaviour
     void Update()
     {
         Wiggle();
-        Smash(5);
     }
 
     /// <summary>
@@ -52,11 +51,6 @@ public class Crate : MonoBehaviour
         transform.position += temp * crateSpeed * Time.deltaTime;
     }
 
-    IEnumerator Death()
-    {
-        yield return new WaitForSeconds(5.0f);
-        Smash(1);
-    }
 
     /// <summary>
     /// Smashes the crate and spawns a number of wumpa fruit in random positions nearby
@@ -66,7 +60,7 @@ public class Crate : MonoBehaviour
     {
         for (int i=0; i<wumps; i++)
         {
-            Instantiate(wumpPrefab, ChangePosition(this.gameObject.transform.position), transform.rotation);
+            Instantiate(wumpPrefab, ChangePosition(this.gameObject.transform.position, 2), transform.rotation);
         }
         this.gameObject.SetActive(false);
     }
@@ -76,13 +70,13 @@ public class Crate : MonoBehaviour
     /// </summary>
     /// <param name="input"> vector 3 you are wanting to change </param>
     /// <returns></returns>
-    public Vector3 ChangePosition(Vector3 input)
+    public Vector3 ChangePosition(Vector3 input, int difference)
     {
         float x = input.x;
         float y = input.y;
         float z = input.z;
-        float randomX = Random.Range(x - 1, x + 1);
-        float randomZ = Random.Range(z - 1, z + 1);
+        float randomX = Random.Range(x - difference, x + difference);
+        float randomZ = Random.Range(z - difference, z + difference);
         temp = new Vector3(randomX, y, randomZ);
         return temp;
     }
