@@ -11,6 +11,7 @@ TagManager:
   - Spike
   - Shield
   - Spike Enemy
+  - Crate
   layers:
   - Default
   - TransparentFX
