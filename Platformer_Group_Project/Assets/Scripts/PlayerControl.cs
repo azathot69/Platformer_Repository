@@ -147,7 +147,7 @@ public class PlayerControl : MonoBehaviour
     /// Makes the player lose a life.
     /// If there is no lives left, perish
     /// </summary>
-    private void Respawn()
+    public void Respawn()
     {
         //I rewrote the respawn script because it wasn't telling me when I died
         lives--;

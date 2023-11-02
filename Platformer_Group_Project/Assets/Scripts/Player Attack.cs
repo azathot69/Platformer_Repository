@@ -47,7 +47,7 @@ public class PlayerAttack : MonoBehaviour
                 break;
 
             case "Shield":
-                
+                playerPrefab.GetComponent<PlayerControl>().Respawn();
                 break;
 
             case "Crate":
