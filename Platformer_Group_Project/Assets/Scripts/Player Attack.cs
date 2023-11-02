@@ -9,6 +9,9 @@ public class PlayerAttack : MonoBehaviour
     //Variables
     public GameObject playerPrefab;
     private Vector3 position;
+
+    
+
     // Start is called before the first frame update
     void Start()
     {
@@ -43,8 +46,13 @@ public class PlayerAttack : MonoBehaviour
                 Debug.Log("Player hit an spiked enemy!");
                 break;
 
+            case "Shield":
                 
-            
+                break;
+
+            case "Crate":
+                other.gameObject.GetComponent<Crate>().Smash(5);
+                break;
 
         }
     }
