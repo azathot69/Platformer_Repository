@@ -37,6 +37,13 @@ public class PlayerAttack : MonoBehaviour
                 Debug.Log("Player hit an enemy!");
                 break;
 
+            case "Spike Enemy":
+
+                other.gameObject.SetActive(false);
+                Debug.Log("Player hit an spiked enemy!");
+                break;
+
+                
             
 
         }
