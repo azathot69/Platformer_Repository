@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 4877581616475577684}
   - component: {fileID: 1299939449958554707}
   m_Layer: 0
-  m_Name: Wumpa Fruit
+  m_Name: Wumpa
   m_TagString: Coin
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
