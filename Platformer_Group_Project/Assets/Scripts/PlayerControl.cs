@@ -219,6 +219,10 @@ public class PlayerControl : MonoBehaviour
                 Respawn();
                 break;
 
+            case "Spike Enemy":
+                Respawn();
+                break;
+
         }
     }
 
