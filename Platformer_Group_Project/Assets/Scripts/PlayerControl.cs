@@ -16,7 +16,6 @@ public class PlayerControl : MonoBehaviour
     public int points = 0;
     public int speed = 7;
     
-//>>>>>>> 65aeeb123b5c6ca15c563f97d1c90e2c18660cf6
     private Rigidbody rigidbodyRef;
     public GameObject attackPrefab;
 
@@ -31,13 +30,15 @@ public class PlayerControl : MonoBehaviour
     public float deathYLevel = -2;
 
     private bool attacking = false;
+    //bouncing off an enemies head
+    public bool bouncy = false;
     private float attackRate = 1.5f;
 
     public Vector3 startingX;
     public Vector3 startingY;
-    //jaspers additions
     public Vector3 spawnPoint;
     public GameObject tempPortal;
+
 
     // Start is called before the first frame update
     void Start()
@@ -121,12 +122,19 @@ public class PlayerControl : MonoBehaviour
             HandleJump();
         }
 
-     
+        
         //Attacking
         if (Input.GetKeyDown(KeyCode.L) && !attacking)
         {
             Attack();
         }
+
+        /* Trying to make enemies bounce off heads
+        if (bouncy)
+        {
+            rigidbodyRef.AddForce(Vector3.up * bounce, ForceMode.Impulse);
+            bouncy = false;
+        } */
     }
 
     /// <summary>
@@ -181,7 +189,8 @@ public class PlayerControl : MonoBehaviour
                 if (other.transform.position.y <= transform.position.y)
                 {
                     other.gameObject.SetActive(false);
-                    rigidbodyRef.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+                    //rigidbodyRef.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+                    //bouncy = true;
                     break;
                 }
                 else
