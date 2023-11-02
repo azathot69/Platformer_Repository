@@ -156,7 +156,7 @@ public class PlayerControl : MonoBehaviour
         {
             Debug.Log("Player Died");
             //swithces scene to game over
-            //EndScreen.SceneSwitch(1);
+            EndScreen.SceneSwitch(1);
             //just moves player back (for testing)
             transform.position = spawnPoint;
         }

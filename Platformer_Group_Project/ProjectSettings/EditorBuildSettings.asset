@@ -8,4 +8,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Jasper's Scene.unity
     guid: cadea76a1187045439ed8cade46ec325
+  - enabled: 1
+    path: Assets/Scenes/GameOver.unity
+    guid: 89a61c472e30f864d94287f6403708c5
   m_configObjects: {}

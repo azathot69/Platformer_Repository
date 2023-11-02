@@ -51,6 +51,7 @@ public class PlayerAttack : MonoBehaviour
                 break;
 
             case "Crate":
+                Debug.Log("Crate");
                 other.gameObject.GetComponent<Crate>().Smash(5);
                 break;
 

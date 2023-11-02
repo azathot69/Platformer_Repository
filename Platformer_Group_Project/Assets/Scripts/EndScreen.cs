@@ -13,6 +13,7 @@ public class EndScreen : MonoBehaviour
     /// </summary>
     public void QuitGame()
     {
+        Debug.Log("Game Quit");
         Application.Quit();
     }
 
@@ -22,6 +23,12 @@ public class EndScreen : MonoBehaviour
     /// <param name="sceneIndex"> the index of your choosing </param>
     public static void SceneSwitch(int sceneIndex)
     {
+        Debug.Log("Scene Switch" + sceneIndex);
         SceneManager.LoadScene(sceneIndex);
+    }
+
+    public void Test()
+    {
+        Debug.Log("PRESSED");
     }
 }
