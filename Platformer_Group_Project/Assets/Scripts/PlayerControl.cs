@@ -223,6 +223,16 @@ public class PlayerControl : MonoBehaviour
                 Respawn();
                 break;
 
+            case "Crate":
+                if (other.transform.position.y <= transform.position.y)
+                {
+                    other.gameObject.GetComponent<Crate>().Smash(5);
+                    break;
+                }
+                else
+                {
+                    break;
+                }
         }
     }
 
