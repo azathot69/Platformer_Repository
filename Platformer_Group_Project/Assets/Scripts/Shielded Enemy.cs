@@ -27,24 +27,46 @@ public class ShieldEnemy : MonoBehaviour
     void Update()
     {
 
-        RaycastHit hit;
-        if (Physics.Raycast(transform.position, Vector3.right, out hit, 0.5f) && goingRight && hit.collider.name != "test_Player" && hit.collider.name != "Attack")
+        //Turn around when near cliff
+        RaycastHit ground;
+        if (Physics.Raycast(transform.position, Vector3.down, out ground, 3f))
         {
-            temp = Vector3.left;
-            goingRight = false;
+            //Turn around when wall is hit
+            RaycastHit hit;
+            if (Physics.Raycast(transform.position, Vector3.right, out hit, 0.5f) && goingRight && hit.collider.name != "test_Player" && hit.collider.name != "Attack")
+            {
+                temp = Vector3.left;
+                goingRight = false;
+            }
+            if (Physics.Raycast(transform.position, Vector3.left, out hit, 0.5f) && !goingRight && hit.collider.name != "test_Player" && hit.collider.name != "Attack")
+            {
+                temp = Vector3.right;
+                goingRight = true;
+            }
         }
-        if (Physics.Raycast(transform.position, Vector3.left, out hit, 0.5f) && !goingRight && hit.collider.name != "test_Player" && hit.collider.name != "Attack")
+        else
         {
-            temp = Vector3.right;
-            goingRight = true;
+
+            if (goingRight)
+            {
+                Debug.Log("Going Left");
+                temp = Vector3.left;
+                goingRight = false;
+            }
+            else if (!goingRight)
+            {
+                Debug.Log("Going Right");
+                temp = Vector3.right;
+                goingRight = true;
+            }
         }
 
         //destroys enemy if a player
-     
-        if (Physics.Raycast(transform.position, Vector3.up, out hit, 1.5f) && hit.collider.name == "test_Player")
+        RaycastHit player;
+        if (Physics.Raycast(transform.position, Vector3.up, out player, 1.5f) && player.collider.name == "test_Player")
         {
             Debug.Log("Enemy Collision");
-            hit.collider.attachedRigidbody.AddForce(Vector3.up * bounce, ForceMode.Impulse);
+            player.collider.attachedRigidbody.AddForce(Vector3.up * bounce, ForceMode.Impulse);
             this.gameObject.SetActive(false);
         }
        

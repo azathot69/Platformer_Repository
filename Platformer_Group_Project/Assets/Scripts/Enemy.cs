@@ -26,19 +26,44 @@ public class Enemy : MonoBehaviour
     void Update()
     {
 
-        RaycastHit hit;
-        if (Physics.Raycast(transform.position, Vector3.right, out hit, 0.5f) && goingRight && hit.collider.name != "test_Player" && hit.collider.name != "Attack")
+        //Turn around when near cliff
+        RaycastHit ground;
+        if (Physics.Raycast(transform.position, Vector3.down, out ground, 3f))
         {
-            temp = Vector3.left;
-            goingRight = false;
+            //Turn around when wall is hit
+            RaycastHit hit;
+            if (Physics.Raycast(transform.position, Vector3.right, out hit, 0.5f) && goingRight && hit.collider.name != "test_Player" && hit.collider.name != "Attack")
+            {
+                temp = Vector3.left;
+                goingRight = false;
+            }
+            if (Physics.Raycast(transform.position, Vector3.left, out hit, 0.5f) && !goingRight && hit.collider.name != "test_Player" && hit.collider.name != "Attack")
+            {
+                temp = Vector3.right;
+                goingRight = true;
+            }
         }
-        if (Physics.Raycast(transform.position, Vector3.left, out hit, 0.5f) && !goingRight && hit.collider.name != "test_Player" && hit.collider.name != "Attack")
+        else
         {
-            temp = Vector3.right;
-            goingRight = true;
+            
+            if (goingRight)
+            {
+                Debug.Log("Going Left");
+                temp = Vector3.left;
+                goingRight = false;
+            }else if (!goingRight)
+            {
+                Debug.Log("Going Right");
+                temp = Vector3.right;
+                goingRight = true;
+            }
         }
+        
 
-       
+        
+
+        
+
         transform.position += temp * speed * Time.deltaTime;
     }
 
