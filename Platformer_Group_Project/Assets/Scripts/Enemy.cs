@@ -48,12 +48,12 @@ public class Enemy : MonoBehaviour
             
             if (goingRight)
             {
-                Debug.Log("Going Left");
+
                 temp = Vector3.left;
                 goingRight = false;
             }else if (!goingRight)
             {
-                Debug.Log("Going Right");
+
                 temp = Vector3.right;
                 goingRight = true;
             }
