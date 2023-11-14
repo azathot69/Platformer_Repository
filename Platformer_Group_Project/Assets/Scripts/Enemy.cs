@@ -5,7 +5,7 @@ using UnityEngine;
 
 //Liebert, Jasper
 //10/24/2023
-//This player will manage moving enemy models and will change their direction when hitting a wall
+//This player will manage moving enemy models and will change their direction when hitting a wall, about to hit a cliff, or falling
 
 public class Enemy : MonoBehaviour
 {
@@ -25,6 +25,14 @@ public class Enemy : MonoBehaviour
 
     // Update is called once per frame
     void Update()
+    {
+        Move();
+    }
+
+    /// <summary>
+    /// Uses raycasts to make sure enemy isn't hitting walls or cliffs
+    /// </summary>
+    private void Move()
     {
 
         //Turn around when near cliff
@@ -46,6 +54,7 @@ public class Enemy : MonoBehaviour
         }
         else
         {
+            //find nearby ground, if not then begin to fall
             StartCoroutine(FallingEnemy());
             if (goingRight && !falling)
             {
@@ -53,26 +62,33 @@ public class Enemy : MonoBehaviour
                 temp = Vector3.left;
                 goingRight = false;
             }
+
             else if (!goingRight && !falling)
             {
 
                 temp = Vector3.right;
                 goingRight = true;
             }
+            //if enemy needs to fall
             else
             {
                 temp = Vector3.down;
                 if (transform.position.y <= -20)
                 {
+                    //despawns when they go below -20
                     this.gameObject.SetActive(false);
                 }
-            }    
+            }
 
         }
 
         transform.position += temp * speed * Time.deltaTime;
     }
 
+    /// <summary>
+    ///waits a second, if the enemy still doensn't have ground underneath then begin to fall
+    /// </summary>
+    /// <returns> how long it waits </returns>
     IEnumerator FallingEnemy()
     {
         RaycastHit ground;

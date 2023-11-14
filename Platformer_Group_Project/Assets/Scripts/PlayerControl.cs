@@ -24,14 +24,10 @@ public class PlayerControl : MonoBehaviour
     public Transform child;
 
     public float jumpForce = 10f;
-    //bouncing off an enemies head
-    public float bounce = 5.0f;
 
     public float deathYLevel = -2;
 
     private bool attacking = false;
-    //bouncing off an enemies head
-    public bool bouncy = false;
     private float attackRate = 1.5f;
 
     public Vector3 startingX;
@@ -57,11 +53,9 @@ public class PlayerControl : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //Check input for movement
+        //Check input for movement, jumping, attacking
         Movement();
-        //Check input for Jump
-
-        //Check input for attack
+   
 
         //Check for pitfall
         if (transform.position.y <= deathYLevel)
@@ -73,7 +67,7 @@ public class PlayerControl : MonoBehaviour
     //Functions
 
     /// <summary>
-    /// Handles the player's attack
+    /// brings in attack object and starts a cooldown to despawn, and when you can press it again
     /// </summary>
     private void Attack()
     {
@@ -87,16 +81,15 @@ public class PlayerControl : MonoBehaviour
             //Attack cooldown
             StartCoroutine(AttackCooldown());
 
-            //Deapwn attack
+            //Despawn attack
             StartCoroutine(Despawn());
 
-
-            Debug.Log("Now Attacking");
+            //Debug.Log("Now Attacking");
         }
     }
 
     /// <summary>
-    /// Handles the player's movement
+    /// Handles the player's movement, jumping and attacking
     /// </summary>
     private void Movement()
     {
@@ -131,7 +124,7 @@ public class PlayerControl : MonoBehaviour
             Attack();
         }
 
-        /* Trying to make enemies bounce off heads
+        /* Trying to make enemies bounce off heads (didn't work)
         if (bouncy)
         {
             rigidbodyRef.AddForce(Vector3.up * bounce, ForceMode.Impulse);
@@ -176,7 +169,7 @@ public class PlayerControl : MonoBehaviour
     }
 
     /// <summary>
-    /// Deals with collision
+    /// Deals with triggerable objects the player collides with
     /// </summary>
     /// <param name="other">The object being collided with</param>
     private void OnTriggerEnter(Collider other)
@@ -187,34 +180,36 @@ public class PlayerControl : MonoBehaviour
                 //Debug.Log("If you see this, let me know - Joseph");
                 break;
 
+            //sets enemy to inactive if the player is at a higher y position, if not player dies
             case "Enemy":
                 if (other.transform.position.y <= transform.position.y)
                 {
                     other.gameObject.SetActive(false);
-                    //rigidbodyRef.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
-                    //bouncy = true;
                     break;
                 }
                 else
                 {
-                    Debug.Log("Player dies by enemy");
+                    //Debug.Log("Player dies by enemy");
                     Respawn();
                     break;
                 }
 
+            //kills you when you step on a spike
             case "Spike":
                 Respawn();
                 break;
 
+            //Wumpa fruit, adds points until you have 100, then converts 100 fruit into lives
             case "Coin":
-                if (points != 100)
+                if (points <= 100)
                 {
                     points++;
                     other.gameObject.SetActive(false);
-                    Debug.Log("Player collect fruit");
-                }else if (points == 100)
+                    //Debug.Log("Player collect fruit");
+                }
+                else if (points >= 100)
                 {
-                    points = 0;
+                    points -= 100;
                     points++;
                     lives++;
                 }
@@ -222,27 +217,32 @@ public class PlayerControl : MonoBehaviour
 
                 break;
 
+            //Adds lives
             case "Lives":
                 lives++;
                 //add to lives
                 break;
 
+            //finds the portal teleport location and teleports player to the new location and sets their new spawn point
             case "Portal":
-                Debug.Log("collided with portal");
+                //Debug.Log("collided with portal");
                 Portal tempPortal = other.gameObject.GetComponent<Portal>();
                 transform.position = tempPortal.portalLocation.transform.position;
                 spawnPoint = tempPortal.portalLocation;
                 break;
 
+            //kills player when they collide with a shield
             case "Shield":
-                Debug.Log("collided with spikes");
+                //Debug.Log("collided with spikes");
                 Respawn();
                 break;
 
+            //kills player when they collide with a spike enemy
             case "Spike Enemy":
                 Respawn();
                 break;
 
+            //destroys the crate if the players position is higher and spawn 5 wumpa fruit
             case "Crate":
                 if (other.transform.position.y <= transform.position.y)
                 {
@@ -256,8 +256,10 @@ public class PlayerControl : MonoBehaviour
         }
     }
 
-
-    //Prevents player from spamming attack
+    /// <summary>
+    /// Stops player from spamming attacks
+    /// </summary>
+    /// <returns> wait time </returns>
     IEnumerator AttackCooldown()
     {
         
@@ -265,7 +267,10 @@ public class PlayerControl : MonoBehaviour
         attacking = false;
     }
 
-    //Set Attack False
+    /// <summary>
+    /// How long the attack will last
+    /// </summary>
+    /// <returns> how many seconds </returns>
     IEnumerator Despawn()
     {
         Debug.Log("Attack despawn");
