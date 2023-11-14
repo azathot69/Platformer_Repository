@@ -207,10 +207,19 @@ public class PlayerControl : MonoBehaviour
                 break;
 
             case "Coin":
-                points++;
-                other.gameObject.SetActive(false);
-                Debug.Log("Player collect fruit");
-                //add to points
+                if (points != 100)
+                {
+                    points++;
+                    other.gameObject.SetActive(false);
+                    Debug.Log("Player collect fruit");
+                }else if (points == 100)
+                {
+                    points = 0;
+                    points++;
+                    lives++;
+                }
+
+
                 break;
 
             case "Lives":
