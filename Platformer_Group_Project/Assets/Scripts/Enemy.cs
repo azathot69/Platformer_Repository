@@ -11,6 +11,7 @@ public class Enemy : MonoBehaviour
 {
     public float speed;
     public bool goingRight = true;
+    public bool falling = false;
     //public GameObject rightPos;
     //public GameObject leftPos;
 
@@ -45,26 +46,41 @@ public class Enemy : MonoBehaviour
         }
         else
         {
-            
-            if (goingRight)
+            StartCoroutine(FallingEnemy());
+            if (goingRight && !falling)
             {
 
                 temp = Vector3.left;
                 goingRight = false;
-            }else if (!goingRight)
+            }
+            else if (!goingRight && !falling)
             {
 
                 temp = Vector3.right;
                 goingRight = true;
             }
+            else
+            {
+                temp = Vector3.down;
+                if (transform.position.y <= -20)
+                {
+                    this.gameObject.SetActive(false);
+                }
+            }    
+
         }
-        
-
-        
-
-        
 
         transform.position += temp * speed * Time.deltaTime;
     }
 
+    IEnumerator FallingEnemy()
+    {
+        RaycastHit ground;
+        Debug.Log("yup");
+        yield return new WaitForSeconds(1);
+        if (!Physics.Raycast(transform.position, Vector3.down, out ground, 3f))
+        {
+            falling = true;
+        }
+    }
 }
