@@ -93,7 +93,7 @@ public class SpikedEnemy : MonoBehaviour
     IEnumerator FallingEnemy()
     {
         RaycastHit ground;
-        Debug.Log("yup");
+        
         yield return new WaitForSeconds(1);
         if (!Physics.Raycast(transform.position, Vector3.down, out ground, 3f))
         {

@@ -25,7 +25,7 @@ public class PlayerControl : MonoBehaviour
 
     public float jumpForce = 10f;
 
-    public float deathYLevel = -2;
+    public float deathYLevel = -1f;
 
     private bool attacking = false;
     private float attackRate = 1.5f;
@@ -60,6 +60,7 @@ public class PlayerControl : MonoBehaviour
         //Check for pitfall
         if (transform.position.y <= deathYLevel)
         {
+            Debug.Log("Fell to death");
             Respawn();
         }
     }
@@ -253,6 +254,10 @@ public class PlayerControl : MonoBehaviour
                 {
                     break;
                 }
+
+            case "End":
+                EndScreen.SceneSwitch(1);
+                break;
         }
     }
 
