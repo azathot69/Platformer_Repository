@@ -36,7 +36,7 @@ public class PlayerControl : MonoBehaviour
 
     public Vector3 startingX;
     public Vector3 startingY;
-    public Vector3 spawnPoint;
+    public GameObject spawnPoint;
     public GameObject tempPortal;
 
 
@@ -46,10 +46,12 @@ public class PlayerControl : MonoBehaviour
         //Get rigidbody component off of the object & stores a reference to it
         rigidbodyRef = GetComponent<Rigidbody>();
 
+        //Move Player to start point
+        transform.position = spawnPoint.transform.position;
+
         //Store object's X coordinates when scene starts
         startingX = transform.position;
         startingY = transform.position;
-        spawnPoint = transform.position;
     }
 
     // Update is called once per frame
@@ -159,14 +161,14 @@ public class PlayerControl : MonoBehaviour
     {
         //I rewrote the respawn script because it wasn't telling me when I died
         lives--;
-        transform.position = spawnPoint;
+        transform.position = spawnPoint.transform.position;
         if (lives <= 0)
         {
             Debug.Log("Player Died");
             //swithces scene to game over
             EndScreen.SceneSwitch(1);
             //just moves player back (for testing)
-            transform.position = spawnPoint;
+            transform.position = spawnPoint.transform.position;
         }
 
         
@@ -220,7 +222,7 @@ public class PlayerControl : MonoBehaviour
                 Debug.Log("collided with portal");
                 Portal tempPortal = other.gameObject.GetComponent<Portal>();
                 transform.position = tempPortal.portalLocation.transform.position;
-                spawnPoint = transform.position;
+                spawnPoint = tempPortal.portalLocation;
                 break;
 
             case "Shield":
