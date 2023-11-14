@@ -4,7 +4,8 @@ using UnityEngine;
 
 //Liebert, Jasper
 //10/31/2023
-//this script will move the crate
+//this script will move the crate up and down and provide the function for smashing the crate
+
 public class Crate : MonoBehaviour
 {
     Vector3 temp = Vector3.up;

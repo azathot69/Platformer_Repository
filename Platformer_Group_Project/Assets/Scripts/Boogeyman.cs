@@ -6,6 +6,7 @@ using UnityEngine;
 // Acuna Joseph
 // [11/7/23]
 // Controls the movement of the Boogyman
+
 public class Boogeyman : MonoBehaviour
 {
     //Variables

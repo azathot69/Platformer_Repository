@@ -5,7 +5,8 @@ using UnityEngine.SceneManagement;
 
 //Liebert, Jasper
 //10/31/2023
-//This script will provide a function for swithching scenes
+//This script will provide a function for swithching scenes and quitting the game
+
 public class EndScreen : MonoBehaviour
 {
     /// <summary>
@@ -25,10 +26,5 @@ public class EndScreen : MonoBehaviour
     {
         Debug.Log("Scene Switch" + sceneIndex);
         SceneManager.LoadScene(sceneIndex);
-    }
-
-    public void Test()
-    {
-        Debug.Log("PRESSED");
     }
 }
